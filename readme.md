@@ -1,3 +1,10 @@
+# Usage
+
+```bash
+npm i --save react-native-vertical-input-credit-card
+OR
+yarn add react-native-vertical-input-credit-card
+```
 
 # React Native Credit Card Input
 Easy (and good looking) credit-card input for your React Native Project 💳 💳
@@ -27,11 +34,6 @@ Code:
 * Form is fully navigatable using keypad
 * Works on both Android and iOS
 
-# Usage
-
-```bash
-npm i --save react-native-vertical-input-credit-card
-```
 
 then add these lines in your react-native codebase
 
