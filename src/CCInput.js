@@ -7,11 +7,21 @@ import {
   TouchableOpacity,
   StyleSheet,
   ViewPropTypes,
+  Image,
 } from "react-native";
 
 const s = StyleSheet.create({
   baseInputStyle: {
     color: "black",
+  },
+  mainContainer: {
+    width: "100%",
+  },
+  inputImgContainer: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
 
@@ -46,10 +56,10 @@ export default class CCInput extends Component {
     containerStyle: {},
     inputStyle: {},
     labelStyle: {},
-    onFocus: () => { },
-    onChange: () => { },
-    onBecomeEmpty: () => { },
-    onBecomeValid: () => { },
+    onFocus: () => {},
+    onChange: () => {},
+    onBecomeEmpty: () => {},
+    onBecomeValid: () => {},
     additionalInputProps: {},
   };
 
@@ -59,42 +69,61 @@ export default class CCInput extends Component {
 
     if (value !== "" && newValue === "") onBecomeEmpty(field);
     if (status !== "valid" && newStatus === "valid") onBecomeValid(field);
-
   }
 
   focus = () => this.refs.input.focus();
 
   _onFocus = () => this.props.onFocus(this.props.field);
-  _onChange = value => this.props.onChange(this.props.field, value);
+  _onChange = (value) => this.props.onChange(this.props.field, value);
 
   render() {
-    const { label, value, placeholder, status, keyboardType,
-      containerStyle, inputStyle, labelStyle,
-      validColor, invalidColor, placeholderColor,
-      additionalInputProps } = this.props;
+    const {
+      label,
+      value,
+      placeholder,
+      status,
+      keyboardType,
+      containerStyle,
+      inputStyle,
+      labelStyle,
+      validColor,
+      invalidColor,
+      placeholderColor,
+      additionalInputProps,
+    } = this.props;
     return (
-      <TouchableOpacity onPress={this.focus}
-        activeOpacity={0.99}>
-        <View style={[containerStyle]}>
+      <TouchableOpacity onPress={this.focus} activeOpacity={0.99}>
+        <View style={[containerStyle, s.mainContainer]}>
           {!!label && <Text style={[labelStyle]}>{label}</Text>}
-          <TextInput ref="input"
-            {...additionalInputProps}
-            keyboardType={keyboardType}
-            autoCapitalise="words"
-            autoCorrect={false}
-            style={[
-              s.baseInputStyle,
-              inputStyle,
-              ((validColor && status === "valid") ? { color: validColor } :
-                (invalidColor && status === "invalid") ? { color: invalidColor } :
-                  {}),
-            ]}
-            underlineColorAndroid={"transparent"}
-            placeholderTextColor={placeholderColor}
-            placeholder={placeholder}
-            value={value}
-            onFocus={this._onFocus}
-            onChangeText={this._onChange} />
+          <View style={[s.inputImgContainer]}>
+            <TextInput
+              ref="input"
+              {...additionalInputProps}
+              keyboardType={keyboardType}
+              autoCapitalise="words"
+              autoCorrect={false}
+              style={[
+                s.baseInputStyle,
+                inputStyle,
+                validColor && status === "valid"
+                  ? { color: validColor }
+                  : invalidColor && status === "invalid"
+                  ? { color: invalidColor }
+                  : {},
+              ]}
+              underlineColorAndroid={"transparent"}
+              placeholderTextColor={placeholderColor}
+              placeholder={placeholder}
+              value={value}
+              onFocus={this._onFocus}
+              onChangeText={this._onChange}
+            />
+            {status === "valid" ? (
+              <Image source={require("./icons/activeCircle.png")} />
+            ) : (
+              <Image source={require("./icons/inActiveCircle.png")} />
+            )}
+          </View>
         </View>
       </TouchableOpacity>
     );
