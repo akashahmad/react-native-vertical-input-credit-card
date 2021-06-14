@@ -75,6 +75,7 @@ export default class CreditCardInput extends Component {
     cardBrandIcons: PropTypes.object,
 
     allowScroll: PropTypes.bool,
+    cardTitle: PropTypes.string,
 
     additionalInputsProps: PropTypes.objectOf(
       PropTypes.shape(TextInput.propTypes)
@@ -107,6 +108,7 @@ export default class CreditCardInput extends Component {
     invalidColor: "red",
     placeholderColor: "gray",
     allowScroll: false,
+    cardTitle: "Add Card Details",
     additionalInputsProps: {},
   };
 
@@ -188,6 +190,7 @@ export default class CreditCardInput extends Component {
       focused,
       placeholderCardView,
       allowScroll,
+      cardTitle,
       requiresName,
       requiresCVC,
       requiresPostalCode,
@@ -224,7 +227,7 @@ export default class CreditCardInput extends Component {
           style={s.form}
           {...scrollViewProps}
         >
-          <Text style={[s.Title]}>Add Card Details</Text>
+          <Text style={[s.Title]}>{cardTitle ? cardTitle : ""}</Text>
           {requiresName && (
             <CCInput
               {...this._inputProps("name")}
@@ -243,6 +246,9 @@ export default class CreditCardInput extends Component {
               inputContainerStyle,
               { width: CARD_NUMBER_INPUT_WIDTH },
             ]}
+            additionalInputProps={{
+              maxLength: 19,
+            }}
           />
           <CCInput
             {...this._inputProps("expiry")}
