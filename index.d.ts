@@ -1,4 +1,4 @@
-declare module "react-native-vertical-input-credit-card-223" {
+declare module "react-native-vertical-input-credit-card" {
   export type FormStatus = "incomplete" | "invalid" | "valid";
 
   export type CardType =
