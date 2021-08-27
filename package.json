@@ -1,6 +1,6 @@
 {
   "name": "react-native-vertical-input-credit-card",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React native credit card input component",
   "main": "index.js",
   "scripts": {

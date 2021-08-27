@@ -12,7 +12,7 @@ import {
 
 const s = StyleSheet.create({
   baseInputStyle: {
-    color: "black",
+    color: "#000",
   },
   mainContainer: {
     width: "100%",
@@ -22,6 +22,16 @@ const s = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  tickCircle: {
+    width: 15,
+    height: 15,
+  },
+  inputContainerStyle: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#b7b7b7",
   },
 });
 
@@ -91,11 +101,17 @@ export default class CCInput extends Component {
       placeholderColor,
       additionalInputProps,
     } = this.props;
+
     return (
       <TouchableOpacity onPress={this.focus} activeOpacity={0.99}>
         <View style={[containerStyle, s.mainContainer]}>
-          {!!label && <Text style={[labelStyle]}>{label}</Text>}
-          <View style={[s.inputImgContainer]}>
+          {/* {!!label && <Text style={[labelStyle]}>{label}</Text>} */}
+          <View
+            style={[
+              s.inputImgContainer,
+              s.inputContainerStyle,
+            ]}
+          >
             <TextInput
               ref="input"
               {...additionalInputProps}
@@ -119,9 +135,15 @@ export default class CCInput extends Component {
               onChangeText={this._onChange}
             />
             {status === "valid" ? (
-              <Image source={require("./icons/activeCircle.png")} />
+              <Image
+                style={[s.tickCircle]}
+                source={require("./icons/activeCircle.png")}
+              />
             ) : (
-              <Image source={require("./icons/inActiveCircle.png")} />
+              <Image
+                style={[s.tickCircle]}
+                source={require("./icons/inActiveTick.png")}
+              />
             )}
           </View>
         </View>

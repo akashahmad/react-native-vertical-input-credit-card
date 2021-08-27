@@ -25,17 +25,15 @@ const s = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     marginVertical: 20,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
     paddingBottom: 10,
-    borderColor: "#131313",
   },
   Title: {
-    paddingTop: 20,
-    paddingBottom: 10,
-    paddingLeft: 6,
-    fontSize: 16,
-    color: "#fff",
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 2,
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "#313131",
   },
   inputContainer: {
     width: "100%",
@@ -99,10 +97,6 @@ export default class CreditCardInput extends Component {
       expiry: "MM/YY",
       cvc: "CVC",
       postalCode: "34567",
-    },
-    inputContainerStyle: {
-      borderBottomWidth: 1,
-      borderBottomColor: "black",
     },
     validColor: "",
     invalidColor: "red",
@@ -231,11 +225,7 @@ export default class CreditCardInput extends Component {
           {requiresName && (
             <CCInput
               {...this._inputProps("name")}
-              containerStyle={[
-                s.inputContainer,
-                inputContainerStyle,
-                { width: NAME_INPUT_WIDTH },
-              ]}
+              containerStyle={[s.inputContainer, { width: NAME_INPUT_WIDTH }]}
             />
           )}
           <CCInput
@@ -243,7 +233,6 @@ export default class CreditCardInput extends Component {
             keyboardType="numeric"
             containerStyle={[
               s.inputContainer,
-              inputContainerStyle,
               { width: CARD_NUMBER_INPUT_WIDTH },
             ]}
             additionalInputProps={{
@@ -253,17 +242,13 @@ export default class CreditCardInput extends Component {
           <CCInput
             {...this._inputProps("expiry")}
             keyboardType="numeric"
-            containerStyle={[s.inputContainer, inputContainerStyle]}
+            containerStyle={[s.inputContainer]}
           />
           {requiresCVC && (
             <CCInput
               {...this._inputProps("cvc")}
               keyboardType="numeric"
-              containerStyle={[
-                s.inputContainer,
-                inputContainerStyle,
-                { width: CVC_INPUT_WIDTH },
-              ]}
+              containerStyle={[{ width: CVC_INPUT_WIDTH }]}
             />
           )}
           {requiresPostalCode && (
@@ -271,7 +256,6 @@ export default class CreditCardInput extends Component {
               {...this._inputProps("postalCode")}
               containerStyle={[
                 s.inputContainer,
-                inputContainerStyle,
                 { width: POSTAL_CODE_INPUT_WIDTH },
               ]}
             />
